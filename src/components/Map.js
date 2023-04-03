@@ -21,18 +21,20 @@ function PositionMarker() {
     <Marker position={position}>
       <Popup>
 	  	You are here
-	  </Popup>
+	    </Popup>
     </Marker>
   )
 }
 
-const Map = () => {
+const Map = ({bounds}) => {
 
   return (
       <MapContainer 
         center={[42.339695, -71.076306]} 
         zoom={15} 
-		zoomControl={false}
+		    zoomControl={false}
+        maxBounds={bounds}
+        maxBoundsViscosity={1}
       >
         <TileLayer
           attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'

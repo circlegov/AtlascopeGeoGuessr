@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -20,9 +20,8 @@ function PositionMarker() {
   return (
     <Marker position={position}>
       <Popup>
-	  	<span>
-              A pretty CSS3 popup. <br/> Easily customizable.
-        </span></Popup>
+	  	You are here
+	  </Popup>
     </Marker>
   )
 }
@@ -30,18 +29,17 @@ function PositionMarker() {
 const Map = () => {
 
   return (
-    <div>
       <MapContainer 
         center={[42.339695, -71.076306]} 
         zoom={15} 
+		zoomControl={false}
       >
         <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
         <PositionMarker/>
       </MapContainer>
-    </div>
   )
 }
 

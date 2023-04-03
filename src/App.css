@@ -6,12 +6,23 @@
   height: 40vmin;
   pointer-events: none;
 }
+.map {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.leaflet-container {
+  height: 600px;
+  width: 600px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;

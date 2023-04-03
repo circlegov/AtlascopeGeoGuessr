@@ -10,12 +10,13 @@ L.Icon.Default.mergeOptions({
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
-
-function PositionMarker() {
+//TODO read up on callbacks and passing state from child to parent
+const PositionMarker = ({handleCallback}) => {
   const [position, setPosition] = useState([42.328529, -71.102312]);
   //TODO make this a bit cleaner but it works
   useMapEvent('click', (e) => {
     setPosition(e.latlng)
+    handleCallback(position)
   })
   return (
     <Marker position={position}>
@@ -26,7 +27,7 @@ function PositionMarker() {
   )
 }
 
-const Map = ({bounds}) => {
+const Map = ({bounds, handleCallback}) => {
 
   return (
       <MapContainer 
@@ -40,7 +41,7 @@ const Map = ({bounds}) => {
           attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
-        <PositionMarker/>
+        <PositionMarker handleCallback={handleCallback}/>
       </MapContainer>
   )
 }

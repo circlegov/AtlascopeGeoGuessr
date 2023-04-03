@@ -13,13 +13,9 @@
   z-index: 1;
 }
 
-#streetview {
-  z-index: 0;
-}
-
 .leaflet-container {
-  height: 600px;
-  width: 600px;
+  height: 35vh;
+  width: 35vw;
 }
 
 @media (prefers-reduced-motion: no-preference) {

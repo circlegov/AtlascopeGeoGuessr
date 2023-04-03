@@ -1,12 +1,7 @@
 import {React, useState, useCallback } from 'react'
 import { GoogleMap, useJsApiLoader, StreetViewPanorama } from '@react-google-maps/api';
 
-const containerStyle = {
-  width: '100vw',
-  height: '100vh'
-};
-
-function StreetView({center}) {
+function StreetView({center, containerStyle}) {
     // fix env
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',

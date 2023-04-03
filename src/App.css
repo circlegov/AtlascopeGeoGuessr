@@ -10,6 +10,11 @@
   position: fixed;
   bottom: 50px;
   right: 50px;
+  z-index: 1;
+}
+
+#streetview {
+  z-index: 0;
 }
 
 .leaflet-container {

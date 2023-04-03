@@ -6,16 +6,23 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+.main {
+  position:relative;
+  width:80vw;
+  height:80vh;
+}
+
 .map {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
+  position: absolute;
+  bottom: 4vh;
+  right: 4vw;
   z-index: 1;
 }
 
 .leaflet-container {
-  height: 35vh;
-  width: 35vw;
+  height: 28vh;
+  width: 28vw;
 }
 
 @media (prefers-reduced-motion: no-preference) {

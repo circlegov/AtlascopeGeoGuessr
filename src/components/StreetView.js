@@ -11,12 +11,7 @@ function StreetView({center, containerStyle}) {
   const [map, setMap] = useState(null)
 
   const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
     setMap(map)
-  }, [])
-
-  const onUnmount = useCallback(function callback(map) {
-    setMap(null)
   }, [])
 
   return isLoaded ? (
@@ -25,11 +20,11 @@ function StreetView({center, containerStyle}) {
         center={center}
         zoom={10}
         onLoad={onLoad}
-        onUnmount={onUnmount}
       >
         <StreetViewPanorama
             position={center}
             visible={true}
+            options={{addressControl: false, showRoadLabels:false}}
         />
       </GoogleMap>
   ) : <></>

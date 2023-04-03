@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet'
-import L from 'leaflet';
+import L, { LatLng } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -10,10 +10,9 @@ L.Icon.Default.mergeOptions({
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
-//TODO read up on callbacks and passing state from child to parent
+
 const PositionMarker = ({handleCallback}) => {
-  const [position, setPosition] = useState([42.328529, -71.102312]);
-  //TODO make this a bit cleaner but it works
+  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312));
   useMapEvent('click', (e) => {
     setPosition(e.latlng)
     handleCallback(position)

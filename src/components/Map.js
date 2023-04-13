@@ -12,7 +12,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const PositionMarker = ({handleCallback}) => {
-  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312));
+  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312)); //
   useMapEvent('click', (e) => {
     setPosition(e.latlng)
     handleCallback(position)
@@ -26,7 +26,14 @@ const PositionMarker = ({handleCallback}) => {
   )
 }
 
-const Map = ({bounds, handleCallback}) => {
+const Map = ({bounds, handleCallback, position, isShown}) => {
+  const [map, setMap] = useState(null);
+
+  const gameFinished = () => {
+    if (isShown) {
+      map.flyTo(position);
+    }
+  }
 
   return (
       <MapContainer 
@@ -35,12 +42,20 @@ const Map = ({bounds, handleCallback}) => {
 		    zoomControl={false}
         maxBounds={bounds}
         maxBoundsViscosity={1}
+        ref={setMap}
       >
         <TileLayer
           attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
         <PositionMarker handleCallback={handleCallback}/>
+        {isShown && (<Marker position={position}>
+                      <Popup>
+                         A pretty CSS3 popup. <br /> Easily customizable.
+                         {gameFinished()}
+                      </Popup>
+                    </Marker>)}
+        
       </MapContainer>
   )
 }

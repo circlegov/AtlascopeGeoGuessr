@@ -5,7 +5,7 @@ function StreetView({center, containerStyle}) {
     // fix env
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyB-3tG8tKtrVRsmDpl_0FUMQyrwcnoRM5g"
+    googleMapsApiKey: "AIzaSyCZlPQ9NzSI2GHlNHIh-sPkXxWcKqnCles"
   })
 
   const [map, setMap] = useState(null)

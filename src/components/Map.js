@@ -11,11 +11,13 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-const PositionMarker = ({handleCallback}) => {
-  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312)); //
+const PositionMarker = ({handleCallback, isShown}) => {
+  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312));
   useMapEvent('click', (e) => {
-    setPosition(e.latlng)
-    handleCallback(position)
+    if (!isShown) {
+      setPosition(e.latlng)
+    }
+    handleCallback(e.latlng)
   })
   return (
     <Marker position={position}>
@@ -48,7 +50,7 @@ const Map = ({bounds, handleCallback, position, isShown}) => {
           attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
-        <PositionMarker handleCallback={handleCallback}/>
+        <PositionMarker handleCallback={handleCallback} isShown={isShown}/>
         {isShown && (<Marker position={position}>
                       <Popup>
                          A pretty CSS3 popup. <br /> Easily customizable.

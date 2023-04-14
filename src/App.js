@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react'
 import Map from './components/Map';
 import StreetView from './components/StreetView';
+import { getDistanceBetweenTwoPoints } from 'calculate-distance-between-coordinates';
 
 // to stop from panning outside the map
 // atlascope bounds
@@ -32,15 +33,12 @@ const location = {
 
 function App() {
 
-  const [pos, setPos] = useState(null)
+  const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
   const handleCallback = (data) => {
-    setPos(data)
-    console.log(data)
+    setPos(data);
+    console.log(data);
   };
-  
-  const gameFinished = console.log("a"); //fly to smth on map so when isShwon is true itll do it 
-                                         // so just display the text
 
   //TODO button component and add onclick functionality to submit point
   return (
@@ -49,7 +47,14 @@ function App() {
       <div className = "map">
         <Map bounds={bounds} handleCallback={handleCallback} position={location} isShown={isShown}/>
       </div>
-      <button onClick={() => setIsShown(true)}>Submit</button>
+      <button onClick={() => {
+        if (pos != null) {
+          setIsShown(true);
+        } else {
+          alert("please pick a point");
+        }
+        }}>Submit</button>
+      <h1>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</h1>
     </div>
   )
 }

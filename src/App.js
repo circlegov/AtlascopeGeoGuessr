@@ -13,10 +13,11 @@ const bounds = [
 
 // change locations and phrases lol
 const locations = {
-  freedomTrail : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"},
-  backBayFens : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"},
-  bostonPublicLibrary : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"},
-  museumOfFineArts : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}
+  0 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // freedom trail,
+  1 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // freedom trail
+  2 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // fens
+  3 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // boston commons
+  4 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}  // mfa
 }
 
 // TODO make both divs overlay thanks
@@ -26,18 +27,24 @@ const containerStyle = {
   height:'80vh',
 };
 
+const randomNumber = Math.floor(Math.random() *  Object.keys(locations).length);
+
 const location = {
-    lat: locations.freedomTrail.lat, 
-    lng: locations.freedomTrail.lng
+    lat: locations[randomNumber].lat, 
+    lng: locations[randomNumber].lng
   };
 
 function App() {
 
+
+
   const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
   const handleCallback = (data) => {
-    setPos(data);
-    console.log(data);
+    if (!isShown) {
+      setPos(data);
+      console.log(data);
+    }
   };
 
   //TODO button component and add onclick functionality to submit point

@@ -28,6 +28,15 @@ const PositionMarker = ({handleCallback, isShown}) => {
   )
 }
 
+const greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 const Map = ({bounds, handleCallback, position, isShown}) => {
   const [map, setMap] = useState(null);
 
@@ -51,7 +60,7 @@ const Map = ({bounds, handleCallback, position, isShown}) => {
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
         <PositionMarker handleCallback={handleCallback} isShown={isShown}/>
-        {isShown && (<Marker position={position}>
+        {isShown && (<Marker position={position} icon={greenIcon}>
                       <Popup>
                          A pretty CSS3 popup. <br /> Easily customizable.
                          {gameFinished()}

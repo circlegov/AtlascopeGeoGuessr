@@ -19,6 +19,11 @@
   gap: 2vh;
 }
 
+.buttons { 
+  display:flex;
+  gap: 2vw;
+}
+
 .map {
   position: absolute;
   bottom: 17vh;

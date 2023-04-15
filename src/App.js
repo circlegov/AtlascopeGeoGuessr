@@ -59,15 +59,17 @@ function App() {
       <div className = "map">
         <Map bounds={bounds} handleCallback={handleCallback} position={location} isShown={isShown}/>
       </div>
-      <Button variant="success" onClick={() => {
-        if (pos != null) {
-          setIsShown(true);
-        } else {
-          alert("please pick a point");
-        }
-        }}>Submit</Button>
-      <h1>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</h1>
-      {isShown && <Button variant="dark" onClick={() => {restartGame()}}>restart</Button>}
+      <div className="buttons">
+          <Button variant="success" onClick={() => {
+          if (pos != null) {
+            setIsShown(true);
+          } else {
+            alert("please pick a point");
+          }
+          }}>Submit</Button>
+          {isShown && <Button variant="dark" onClick={() => {restartGame()}}>Play Again</Button>}
+        </div>
+      <p>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</p>
     </div>
   )
 }

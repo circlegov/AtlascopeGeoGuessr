@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Map from './components/Map';
 import StreetView from './components/StreetView';
 import { getDistanceBetweenTwoPoints } from 'calculate-distance-between-coordinates';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // to stop from panning outside the map
 // atlascope bounds
@@ -23,8 +25,8 @@ const locations = {
 // TODO make both divs overlay thanks
 // and make them smaller in the thing
 const containerStyle = {
-  width: '90vw',
-  height:'90vh',
+  width: '80vw',
+  height:'80vh',
 };
 
 function App() {
@@ -52,19 +54,20 @@ function App() {
 
   return (
     <div className="main">
+      <h1>Atlascope GeoGuessr</h1>
       <StreetView center={location} containerStyle={containerStyle}/>
       <div className = "map">
         <Map bounds={bounds} handleCallback={handleCallback} position={location} isShown={isShown}/>
       </div>
-      <button onClick={() => {
+      <Button variant="success" onClick={() => {
         if (pos != null) {
           setIsShown(true);
         } else {
           alert("please pick a point");
         }
-        }}>Submit</button>
+        }}>Submit</Button>
       <h1>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</h1>
-      {isShown && <button onClick={() => {restartGame()}}>restart</button>}
+      {isShown && <Button variant="dark" onClick={() => {restartGame()}}>restart</Button>}
     </div>
   )
 }

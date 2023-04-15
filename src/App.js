@@ -23,8 +23,8 @@ const locations = [
 ]
 
 const containerStyle = {
-  width: '80vw',
-  height:'80vh',
+  width: '75vw',
+  height:'75vh',
 };
 
 function App() {

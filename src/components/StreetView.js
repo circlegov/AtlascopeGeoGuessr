@@ -8,6 +8,7 @@ function StreetView({center, containerStyle}) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   })
 
+  // eslint-disable-next-line no-unused-vars
   const [map, setMap] = useState(null)
 
   const onLoad = useCallback(function callback(map) {

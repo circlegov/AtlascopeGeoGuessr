@@ -9,14 +9,19 @@
 
 .main {
   position:relative;
-  width:80vw;
-  height:80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  flex-direction:column
 }
 
 .map {
   position: absolute;
-  bottom: 4vh;
-  right: 4vw;
+  bottom: 17vh;
+  right: 12vw;
   z-index: 1;
 }
 

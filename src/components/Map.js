@@ -12,20 +12,22 @@ L.Icon.Default.mergeOptions({
 });
 
 const PositionMarker = ({handleCallback, isShown}) => {
-  const [position, setPosition] = useState(new LatLng(42.328529, -71.102312));
+  const [position, setPosition] = useState(null);
   useMapEvent('click', (e) => {
     if (!isShown) {
       setPosition(e.latlng)
+      handleCallback(e.latlng)
     }
-    handleCallback(e.latlng)
   })
-  return (
-    <Marker position={position}>
-      <Popup>
-	  	You are here
-	    </Popup>
-    </Marker>
-  )
+  if (position != null) {
+    return (
+      <Marker position={position}>
+        <Popup>
+        You are here
+        </Popup>
+      </Marker>
+    );
+  } 
 }
 
 const greenIcon = new L.Icon({
@@ -39,6 +41,7 @@ const greenIcon = new L.Icon({
 
 const Map = ({bounds, handleCallback, position, isShown}) => {
   const [map, setMap] = useState(null);
+  const startPos = [42.328529, -71.102312];
 
   const gameFinished = () => {
     if (isShown) {
@@ -48,7 +51,7 @@ const Map = ({bounds, handleCallback, position, isShown}) => {
 
   return (
       <MapContainer 
-        center={[42.339695, -71.076306]} 
+        center={startPos} 
         zoom={15} 
 		    zoomControl={false}
         maxBounds={bounds}

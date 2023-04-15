@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet'
-import L, { LatLng } from 'leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -53,7 +53,9 @@ const Map = ({bounds, handleCallback, position, isShown}) => {
       <MapContainer 
         center={startPos} 
         zoom={15} 
-		    zoomControl={false}
+        minZoom={13}
+        maxZoom={40}
+		    zoomControl={true}
         maxBounds={bounds}
         maxBoundsViscosity={1}
         ref={setMap}

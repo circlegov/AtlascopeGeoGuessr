@@ -31,6 +31,11 @@
   z-index: 1;
 }
 
+.leaflet-container:hover {
+  height: 35vh;
+  width: 35vw;
+}
+
 .leaflet-container {
   height: 24vh;
   width: 24vw;

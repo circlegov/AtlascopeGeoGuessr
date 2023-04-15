@@ -14,16 +14,14 @@ const bounds = [
 ]
 
 // change locations and phrases lol
-const locations = {
-  0 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // freedom trail,
-  1 : {lat: 42.354445408577654 , lng: -71.06783816366712, phrase: "whats a freedom trail?"}, // freedom trail
-  2 : {lat: 42.354445408577654 , lng: -71.46783816366712, phrase: "whats a freedom trail?"}, // fens
-  3 : {lat: 42.354445408577654 , lng: -71.36783816366712, phrase: "whats a freedom trail?"}, // boston commons
-  4 : {lat: 42.354445408577654 , lng: -71.16783816366712, phrase: "whats a freedom trail?"}  // mfa
-}
+const locations = [
+  {lat: 42.348711681123696 , lng: -71.07913979214999, phrase: "whats a fl?"}, // bpl
+  {lat: 42.366826013349225 , lng: -71.05849031196088, phrase: "whail?"}, // freedom trail
+  {lat: 42.34321306338657  , lng: -71.09463509299229, phrase: "wom trail?"}, // fens
+  {lat: 42.35449486876708  , lng: -71.06683831918687, phrase: "whats dom trail?"}, // boston commons
+  {lat: 42.338712819158914 , lng: -71.09446475207845, phrase: "il?"}  // mfa
+]
 
-// TODO make both divs overlay thanks
-// and make them smaller in the thing
 const containerStyle = {
   width: '80vw',
   height:'80vh',
@@ -33,7 +31,7 @@ function App() {
 
   const randomLocation = () => {
     const randomNumber = Math.floor(Math.random() *  Object.keys(locations).length);
-
+    console.log(locations[randomNumber].phrase)
     return ({lat: locations[randomNumber].lat, 
              lng:  locations[randomNumber].lng})
   };
@@ -70,6 +68,7 @@ function App() {
           {isShown && <Button variant="dark" onClick={() => {restartGame()}}>Play Again</Button>}
         </div>
       <p>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</p>
+      <p>{location.phrase}</p>
     </div>
   )
 }

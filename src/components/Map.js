@@ -42,7 +42,7 @@ const greenIcon = new L.Icon({
 
 const Map = ({bounds, handleCallback, finalPos, isShown, isReset, position, setPosition, setIsReset}) => {
   const [map, setMap] = useState(null);
-  const startPos = [42.328529, -71.102312];
+  const [startPos, setStartPos] = useState([42.328529, -71.102312]);
 
   const gameFinished = () => {
     if (isShown) {
@@ -51,6 +51,7 @@ const Map = ({bounds, handleCallback, finalPos, isShown, isReset, position, setP
   }
 
   useEffect(() => {
+    setStartPos(startPos);
     if (isReset) { 
       map.flyTo({lat:startPos[0], lng:startPos[1]})
       setPosition(null);

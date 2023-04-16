@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -11,14 +11,15 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-const PositionMarker = ({handleCallback, isShown}) => {
-  const [position, setPosition] = useState(null);
+const PositionMarker = ({handleCallback, isShown, position, setPosition}) => {
   useMapEvent('click', (e) => {
     if (!isShown) {
       setPosition(e.latlng)
+      console.log(e.latn)
       handleCallback(e.latlng)
     }
   })
+
   if (position != null) {
     return (
       <Marker position={position}>
@@ -39,16 +40,23 @@ const greenIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-const Map = ({bounds, handleCallback, position, isShown}) => {
+const Map = ({bounds, handleCallback, finalPos, isShown, isReset, position, setPosition, setIsReset}) => {
   const [map, setMap] = useState(null);
   const startPos = [42.328529, -71.102312];
 
   const gameFinished = () => {
     if (isShown) {
-      map.flyTo(position);
+      map.flyTo(finalPos);
     }
   }
 
+  useEffect(() => {
+    if (isReset) { 
+      map.flyTo({lat:startPos[0], lng:startPos[1]})
+      setPosition(null);
+      setIsReset(false);
+    }
+  }, [isReset, startPos, map, setIsReset, setPosition]); 
   return (
       <MapContainer 
         center={startPos} 
@@ -64,8 +72,8 @@ const Map = ({bounds, handleCallback, position, isShown}) => {
           attribution='&copy; <a href=\"https://leventhalmap.org\">Leventhal Map & Education Center</a> at the <a href=\"https://bpl.org\">Boston Public Library</a>'
           url="https://s3.us-east-2.wasabisys.com/urbanatlases/39999059010825/tiles/{z}/{x}/{y}.png"
         />
-        <PositionMarker handleCallback={handleCallback} isShown={isShown}/>
-        {isShown && (<Marker position={position} icon={greenIcon}>
+        <PositionMarker handleCallback={handleCallback} isShown={isShown} position={position} setPosition={setPosition}/>
+        {isShown && (<Marker position={finalPos} icon={greenIcon}>
                       <Popup>
                          A pretty CSS3 popup. <br /> Easily customizable.
                          {gameFinished()}

@@ -40,10 +40,15 @@ function App() {
     setIsShown(false);
     setPos(null);
     setLocation(randomLocation());
+    setPosition(null);
+    setIsReset(true);
   }
   const [location, setLocation] = useState(randomLocation());
   const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
+  const [isReset, setIsReset] = useState(false);
+  const [position, setPosition] = useState(null);
+
   const handleCallback = (data) => {
     if (!isShown) {
       setPos(data);
@@ -55,7 +60,7 @@ function App() {
       <h1>Atlascope GeoGuessr</h1>
       <StreetView center={location} containerStyle={containerStyle}/>
       <div className = "map">
-        <Map bounds={bounds} handleCallback={handleCallback} position={location} isShown={isShown}/>
+        <Map bounds={bounds} handleCallback={handleCallback} finalPos={location} isShown={isShown} isReset={isReset} position={position} setPosition={setPosition} setIsReset={setIsReset}/>
       </div>
       <div className="buttons">
           <Button variant="success" onClick={() => {

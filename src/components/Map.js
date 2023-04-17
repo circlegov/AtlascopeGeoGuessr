@@ -53,7 +53,7 @@ const Map = ({bounds, handleCallback, finalPos, isShown, isReset, position, setP
   useEffect(() => {
     setStartPos(startPos);
     if (isReset) { 
-      map.flyTo({lat:startPos[0], lng:startPos[1]})
+      map.panTo({lat:startPos[0], lng:startPos[1]})
       setPosition(null);
       setIsReset(false);
     }

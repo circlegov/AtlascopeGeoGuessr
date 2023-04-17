@@ -15,11 +15,13 @@ const bounds = [
 
 // change locations and phrases lol
 const locations = [
-  {lat: 42.348711681123696 , lng: -71.07913979214999, phrase: "whats a fl?"}, // bpl
-  {lat: 42.366826013349225 , lng: -71.05849031196088, phrase: "whail?"}, // freedom trail
-  {lat: 42.34321306338657  , lng: -71.09463509299229, phrase: "wom trail?"}, // fens
-  {lat: 42.35449486876708  , lng: -71.06683831918687, phrase: "whats dom trail?"}, // boston commons
-  {lat: 42.338712819158914 , lng: -71.09446475207845, phrase: "il?"}  // mfa
+  {lat: 42.348711681123696 , lng: -71.07913979214999, phrase: "The Boston Public Library is the first large free municipal library in the United States (and they have made this project possible) - bpl.org"}, // bpl
+  {lat: 42.366826013349225 , lng: -71.05849031196088, phrase: "The Freedom Trail is 2.5 miles long with 16 nationally significant historic sites - thefreedomtrail.org"}, // freedom trail
+  {lat: 42.34321306338657  , lng: -71.09463509299229, phrase: "Come see the geese"}, // fens
+  {lat: 42.35449486876708  , lng: -71.06683831918687, phrase: "Boston Common is America's oldest public park - thefreedomtrail.org."}, // boston commons
+  {lat: 42.338712819158914 , lng: -71.09446475207845, phrase: "The Museum of Fine Arts encompasses nearly 500,000 works of art - mfa.org."},  // mfa
+  {lat: 42.37687716858686  , lng: -71.06046526638188, phrase: "The Battle of Bunker Hill was one of the bloodiest of the American Revolution."},  // bunker hill
+  {lat: 42.35889517564658  , lng:-71.05815590108267, phrase: "The Old State House is the oldest surviving public building in Boston."} // Old State House
 ]
 
 const containerStyle = {
@@ -30,10 +32,8 @@ const containerStyle = {
 function App() {
 
   const randomLocation = () => {
-    const randomNumber = Math.floor(Math.random() *  Object.keys(locations).length);
-    console.log(locations[randomNumber].phrase)
-    return ({lat: locations[randomNumber].lat, 
-             lng:  locations[randomNumber].lng})
+    return ({lat: locations[randNumber].lat, 
+             lng:  locations[randNumber].lng})
   };
 
   const restartGame = () => {
@@ -42,7 +42,9 @@ function App() {
     setLocation(randomLocation());
     setPosition(null);
     setIsReset(true);
+    setRandNumber(Math.floor(Math.random() *  Object.keys(locations).length));
   }
+  const [randNumber, setRandNumber] = useState(Math.floor(Math.random() *  Object.keys(locations).length));
   const [location, setLocation] = useState(randomLocation());
   const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
@@ -72,8 +74,10 @@ function App() {
           }}>Submit</Button>
           {isShown && <Button variant="dark" onClick={() => {restartGame()}}>Play Again</Button>}
         </div>
-      <p>{isShown && getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')}</p>
-      <p>{location.phrase}</p>
+      <p>{isShown && locations[randNumber].phrase}
+        <br/>
+        {isShown && `You were ${parseFloat((getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')).toFixed(2))} miles away`}
+        </p>
     </div>
   )
 }

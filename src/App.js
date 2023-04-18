@@ -43,8 +43,10 @@ function App() {
     setPosition(null);
     setIsReset(true);
     setRandNumber(Math.floor(Math.random() *  Object.keys(locations).length));
+    setCurNumber(randNumber);
   }
   const [randNumber, setRandNumber] = useState(Math.floor(Math.random() *  Object.keys(locations).length));
+  const [curNumber, setCurNumber] = useState(randNumber);
   const [location, setLocation] = useState(randomLocation());
   const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
@@ -74,7 +76,7 @@ function App() {
           }}>Submit</Button>
           {isShown && <Button variant="dark" onClick={() => {restartGame()}}>Play Again</Button>}
         </div>
-      <p>{isShown && locations[randNumber].phrase}
+      <p>{isShown && locations[curNumber].phrase}
         <br/>
         {isShown && `You were ${parseFloat((getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')).toFixed(2))} miles away`}
         </p>

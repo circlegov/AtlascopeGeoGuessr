@@ -76,7 +76,7 @@ const Map = ({bounds, handleCallback, finalPos, isShown, isReset, position, setP
         <PositionMarker handleCallback={handleCallback} isShown={isShown} position={position} setPosition={setPosition}/>
         {isShown && (<Marker position={finalPos} icon={greenIcon}>
                       <Popup>
-                         A pretty CSS3 popup. <br /> Easily customizable.
+                         The final location
                          {gameFinished()}
                       </Popup>
                     </Marker>)}

@@ -31,23 +31,23 @@ const containerStyle = {
 
 function App() {
 
-  const randomLocation = () => {
-    return ({lat: locations[randNumber].lat, 
-             lng:  locations[randNumber].lng})
+  const randomLocation = (randomNumber) => {
+    return ({lat: locations[randomNumber].lat, 
+             lng:  locations[randomNumber].lng})
   };
 
   const restartGame = () => {
+    const newNum = Math.floor(Math.random() *  Object.keys(locations).length)
+
     setIsShown(false);
     setPos(null);
-    setLocation(randomLocation());
+    setLocation(randomLocation(newNum));
     setPosition(null);
     setIsReset(true);
-    setRandNumber(Math.floor(Math.random() *  Object.keys(locations).length));
-    setCurNumber(randNumber);
+    setRandNumber(newNum);
   }
   const [randNumber, setRandNumber] = useState(Math.floor(Math.random() *  Object.keys(locations).length));
-  const [curNumber, setCurNumber] = useState(randNumber);
-  const [location, setLocation] = useState(randomLocation());
+  const [location, setLocation] = useState(randomLocation(randNumber));
   const [pos, setPos] = useState(null);
   const [isShown, setIsShown] = useState(false);
   const [isReset, setIsReset] = useState(false);
@@ -76,7 +76,7 @@ function App() {
           }}>Submit</Button>
           {isShown && <Button variant="dark" onClick={() => {restartGame()}}>Play Again</Button>}
         </div>
-      <p>{isShown && locations[curNumber].phrase}
+      <p>{isShown && locations[randNumber].phrase}
         <br/>
         {isShown && `You were ${parseFloat((getDistanceBetweenTwoPoints({lat: location.lat , lon: location.lng},{lat : pos.lat, lon : pos.lng},'mile')).toFixed(2))} miles away`}
         </p>
